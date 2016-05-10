@@ -1,0 +1,15 @@
+{
+  "name": "fb-messenger-bot",
+  "description": "Example for Facebook Messanger Bot",
+  "repository": "https://github.com/bubach/FbMessengerBot.git",
+  "keywords": ["Messanger", "Bot"],
+  "addons": [],
+  "env": {
+    "VALIDATION_TOKEN": {
+      "description": "Messenger Token"
+    },
+    "PAGE_ACCESS_TOKEN": {
+      "description": "Page Access Token"
+    }
+  }
+}
