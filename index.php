@@ -1,4 +1,5 @@
 <?php
+
 require_once __DIR__ . '/vendor/autoload.php';
 
 use Symfony\Component\HttpFoundation\Request;
@@ -13,6 +14,11 @@ $app->get('/callback', function (Request $request) use ($app) {
   return new Response('Error, wrong validation token', 500);
 });
 
+
+$app->get('/hello', function (Request $request) use ($app) {
+  return new Response('hello', 200);
+});
+
 $app->post('/callback', function (Request $request) use ($app) {
   $content = json_decode($request->getContent(), true);
   $messaging_events = $content['entry'][0]['messaging'];
@@ -25,7 +31,7 @@ $app->post('/callback', function (Request $request) use ($app) {
         'POST', 'https://graph.facebook.com/v2.6/me/messages?access_token='.getenv('PAGE_ACCESS_TOKEN'), [
             'body' => json_encode([
               'recipient' => [ 'id' => $event['sender']['id'] ],
-              'message'   => [ 'text' => $event['message']['text'] ]
+              'message'   => [ 'text' => $event['message']['text'] . $event['sender']['id'] ]
             ]),
             'headers' => [
                 'Content-Type' => 'application/json; charset=UTF-8',
